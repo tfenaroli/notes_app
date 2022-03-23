@@ -78,7 +78,7 @@ const Home = (props) => {
                         <Ionicons
                             name="ios-add-circle-outline"
                             size={34}
-                            color="blue"
+                            color="#3da2cc"
                         />
                     </TouchableOpacity>
                 </KeyboardAvoidingView>
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
         position: "absolute",
         paddingHorizontal: 16,
-        paddingTop: inputSpace,
+        paddingVertical: inputSpace,
         bottom: inputSpace,
     },
     input: {

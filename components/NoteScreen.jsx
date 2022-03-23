@@ -3,7 +3,7 @@ import React from "react";
 
 const NoteScreen = (props) => {
     return (
-        <View>
+        <View style={styles.container}>
             <Text style={styles.noteText}>{props.route.params.fullNote}</Text>
         </View>
     );
@@ -12,7 +12,13 @@ const NoteScreen = (props) => {
 export default NoteScreen;
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: "#ebf9ff",
+    },
+
     noteText: {
+        fontSize: 18,
         padding: 20,
     },
 });

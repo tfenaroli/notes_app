@@ -20,12 +20,7 @@ const Note = (props) => {
             <TouchableOpacity
                 onPress={() => props.handleDeleteNote(props.index)}
             >
-                <Ionicons
-                    style={styles.delete}
-                    name="md-trash-outline"
-                    size={24}
-                    color="red"
-                />
+                <Ionicons name="md-trash-outline" size={24} color="red" />
             </TouchableOpacity>
         </TouchableOpacity>
     );
@@ -38,7 +33,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
-        backgroundColor: "rgb(240, 240, 240)",
+        backgroundColor: "#ebf9ff",
         padding: 20,
         marginTop: 16,
         borderRadius: 10,
