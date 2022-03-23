@@ -3,7 +3,10 @@ import React from "react";
 
 const Note = (props) => {
     return (
-        <TouchableOpacity style={styles.note}>
+        <TouchableOpacity
+            style={styles.note}
+            onPress={() => props.navigation.navigate("NoteScreen")}
+        >
             <View style={styles.noteLeft}>
                 <View style={styles.circle}></View>
                 <Text style={styles.text}>{props.text}</Text>

@@ -6,15 +6,15 @@ const Home = (props) => {
     return (
         <View style={styles.container}>
             <View style={styles.contentWrapper}>
-                <Button
+                {/* <Button
                     title="Go to Note"
                     onPress={() => props.navigation.navigate("NoteScreen")}
-                />
+                /> */}
                 <Text style={styles.title}>Notes</Text>
                 <View>
-                    <Note text="Note 1" />
-                    <Note text="Note 2" />
-                    <Note text="Note 3" />
+                    <Note text="Note 1" navigation={props.navigation} />
+                    <Note text="Note 2" navigation={props.navigation} />
+                    <Note text="Note 3" navigation={props.navigation} />
                 </View>
             </View>
         </View>
