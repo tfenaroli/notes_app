@@ -1,5 +1,6 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 const Note = (props) => {
     return (
@@ -12,12 +13,20 @@ const Note = (props) => {
             }
         >
             <View style={styles.noteLeft}>
-                <View style={styles.circle}></View>
                 <Text style={styles.text}>
-                    {props.fullNote.substring(0, 20)}
+                    {props.fullNote.substring(0, 20)}...
                 </Text>
             </View>
-            <View style={styles.delete}></View>
+            <TouchableOpacity
+                onPress={() => props.handleDeleteNote(props.index)}
+            >
+                <Ionicons
+                    style={styles.delete}
+                    name="md-trash-outline"
+                    size={24}
+                    color="red"
+                />
+            </TouchableOpacity>
         </TouchableOpacity>
     );
 };
@@ -38,21 +47,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
     },
-    circle: {
-        width: 20,
-        height: 20,
-        borderRadius: 10,
-        marginRight: 20,
-        backgroundColor: "rgb(180, 180, 180)",
-    },
     text: {
         fontSize: 18,
-        // fontWeight: "bold",
-    },
-    delete: {
-        width: 12,
-        height: 12,
-        backgroundColor: "red",
-        borderRadius: 10,
     },
 });
