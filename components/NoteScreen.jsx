@@ -1,12 +1,18 @@
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 
-const NoteScreen = () => {
+const NoteScreen = (props) => {
     return (
         <View>
-            <Text>NoteScreen</Text>
+            <Text style={styles.noteText}>{props.route.params.fullNote}</Text>
         </View>
     );
 };
 
 export default NoteScreen;
+
+const styles = StyleSheet.create({
+    noteText: {
+        padding: 20,
+    },
+});

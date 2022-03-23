@@ -5,11 +5,17 @@ const Note = (props) => {
     return (
         <TouchableOpacity
             style={styles.note}
-            onPress={() => props.navigation.navigate("NoteScreen")}
+            onPress={() =>
+                props.navigation.navigate("NoteScreen", {
+                    fullNote: props.fullNote,
+                })
+            }
         >
             <View style={styles.noteLeft}>
                 <View style={styles.circle}></View>
-                <Text style={styles.text}>{props.text}</Text>
+                <Text style={styles.text}>
+                    {props.fullNote.substring(0, 20)}
+                </Text>
             </View>
             <View style={styles.delete}></View>
         </TouchableOpacity>
@@ -36,7 +42,7 @@ const styles = StyleSheet.create({
         width: 20,
         height: 20,
         borderRadius: 10,
-        marginRight: 8,
+        marginRight: 20,
         backgroundColor: "rgb(180, 180, 180)",
     },
     text: {
@@ -47,5 +53,6 @@ const styles = StyleSheet.create({
         width: 12,
         height: 12,
         backgroundColor: "red",
+        borderRadius: 10,
     },
 });
