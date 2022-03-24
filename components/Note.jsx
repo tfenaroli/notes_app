@@ -9,6 +9,7 @@ const Note = (props) => {
             onPress={() =>
                 props.navigation.navigate("NoteScreen", {
                     fullNote: props.fullNote,
+                    fullNoteIndex: props.index,
                 })
             }
         >
