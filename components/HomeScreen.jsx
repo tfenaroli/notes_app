@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import {
     StyleSheet,
-    Text,
+    Button,
     View,
     TouchableWithoutFeedback,
     TouchableOpacity,
@@ -12,6 +12,7 @@ import {
     Keyboard,
     Alert,
 } from "react-native";
+import { useFocusEffect } from "@react-navigation/native";
 import Note from "./Note";
 import { Ionicons } from "@expo/vector-icons";
 import { useHeaderHeight } from "@react-navigation/elements";
@@ -20,14 +21,7 @@ const inputSpace = 40;
 
 const Home = (props) => {
     const [note, setNote] = useState();
-    const [notes, setNotes] = useState([
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas tristique aliquam ligula. Etiam porta rhoncus elit, vitae congue lorem maximus et. Nunc vitae sem id lectus porta feugiat non non erat. Donec ac blandit eros. Ut laoreet vehicula metus a vulputate. Cras sit amet lorem id erat bibendum pulvinar vitae at nibh. Donec quis metus mauris. Phasellus convallis tristique nisi eget blandit. Nulla facilisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aenean vestibulum mi ut aliquam efficitur. Duis eget varius nunc. Ut ut sem posuere justo aliquam congue. Vestibulum faucibus tellus in nulla dapibus varius. In pellentesque dapibus eleifend. In id ligula sem.",
-        "Maecenas sapien justo, aliquet id scelerisque non, tempus quis est. Curabitur sit amet lectus maximus, sollicitudin ligula semper, fermentum nisl. Donec et mauris mi. Vestibulum euismod turpis at tellus gravida finibus. Donec eu eros et augue convallis porttitor vel in nulla. Vestibulum imperdiet lobortis quam. Suspendisse pharetra mi felis, a tincidunt ipsum egestas sed. Etiam imperdiet, eros sit amet maximus tempus, turpis lorem rhoncus leo, sed laoreet sem nisl ac ipsum. Etiam euismod dui vitae lorem dignissim iaculis. Nulla facilisi.",
-        "Phasellus luctus porttitor lacus non mollis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec vehicula tortor eu ullamcorper egestas. Aenean pulvinar diam ut lobortis ullamcorper. Sed in ante vel libero pellentesque mattis. Praesent ut condimentum lectus. Curabitur ut neque eu orci suscipit ultricies eget ac tellus. Praesent eget turpis arcu. Sed hendrerit consectetur mauris, eu vestibulum erat rhoncus at. Proin auctor massa in egestas laoreet. Vestibulum pretium dui sit amet ipsum suscipit, ut tincidunt sem sagittis. Nunc elementum tortor at est placerat vehicula. Etiam sed metus et ex tristique dignissim",
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas tristique aliquam ligula. Etiam porta rhoncus elit, vitae congue lorem maximus et. Nunc vitae sem id lectus porta feugiat non non erat. Donec ac blandit eros. Ut laoreet vehicula metus a vulputate. Cras sit amet lorem id erat bibendum pulvinar vitae at nibh. Donec quis metus mauris. Phasellus convallis tristique nisi eget blandit. Nulla facilisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aenean vestibulum mi ut aliquam efficitur. Duis eget varius nunc. Ut ut sem posuere justo aliquam congue. Vestibulum faucibus tellus in nulla dapibus varius. In pellentesque dapibus eleifend.  id ligula sem",
-        "Maecenas sapien justo, aliquet id scelerisque non, tempus quis est. Curabitur sit amet lectus maximus, sollicitudin ligula semper, fermentum nisl. Donec et mauris mi. Vestibulum euismod turpis at tellus gravida finibus. Donec eu eros et augue convallis porttitor vel in nulla. Vestibulum imperdiet lobortis quam. Suspendisse pharetra mi felis, a tincidunt ipsum egestas sed. Etiam imperdiet, eros sit amet maximus tempus, turpis lorem rhoncus leo, sed laoreet sem nisl ac ipsum. Etiam euismod dui vitae lorem iaculis. Nulla facilisi.",
-        "Phasellus luctus porttitor lacus non mollis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec vehicula tortor eu ullamcorper egestas. Aenean pulvinar diam ut lobortis ullamcorper. Sed in ante vel libero pellentesque mattis. Praesent ut condimentum lectus. Curabitur ut neque eu orci suscipit ultricies eget ac tellus. Praesent eget turpis arcu. Sed hendrerit consectetur mauris, eu vestibulum erat rhoncus at. Proin auctor massa in egestas laoreet. Vestibulum pretium dui sit amet ipsum suscipit, ut tincidunt sem sagittis. Nunc elementum tortor at est placerat vehicula. Etiam sed metus et ex tristique ",
-    ]);
+    const [notes, setNotes] = useState(["Note 1", "Note 2", "Note 3"]);
 
     const headerHeight = useHeaderHeight();
 
@@ -49,6 +43,20 @@ const Home = (props) => {
         setNotes(notesCopy);
     };
 
+    // console.log(notes);
+
+    const handleRefresh = () => {
+        if (props.route.params === undefined) {
+            // console.log("newNote is null");
+        } else {
+            let notesCopy = [...notes];
+            notesCopy[props.route.params.newNoteIndex] =
+                props.route.params.newNote;
+            setNotes(notesCopy);
+        }
+        props.route.params = undefined;
+    };
+
     return (
         <TouchableWithoutFeedback>
             <SafeAreaView style={styles.container}>
@@ -66,6 +74,7 @@ const Home = (props) => {
                         )}
                     />
                 </View>
+                <Button title="refresh" onPress={() => handleRefresh()} />
                 <KeyboardAvoidingView
                     style={styles.inputWrapper}
                     behavior={Platform.OS === "ios" ? "padding" : "height"}
